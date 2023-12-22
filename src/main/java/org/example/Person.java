@@ -14,6 +14,11 @@ public class Person implements SalaryCalculation {
         this.grade = grade;
         this.age = age;
     }
+    public Person(Person person) {
+        this.name = person.name;
+        this.grade = person.grade;
+        this.age = person.age;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -34,8 +39,16 @@ public class Person implements SalaryCalculation {
         this.age = age;
     }
 
-    @Cache
+    @Cache(100000)
     public double salaryCalculation() {
         return this.grade * 1.75 +  age/10f;
     }
+
+
+    public boolean equalsCache(Object o) {
+        Person person = (Person) o;
+        return grade == person.grade && age == person.age;
+    }
+
+
 }
